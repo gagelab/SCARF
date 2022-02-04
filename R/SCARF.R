@@ -31,10 +31,7 @@ SCARF <-function(data, genoname, phenoname, predictornames, regressoroptions=lis
   if(!is.na(randomseed)){
     set.seed(randomseed)
   }
-  
-  #DEBUG
-  browser()
-  
+
   # TODO: check data types etc and issue errors if bad.
   
   # Identify and remove records with missing phenotypic data
