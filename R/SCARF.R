@@ -47,10 +47,10 @@ SCARF <-function(data, genoname, phenoname, predictornames, regressoroptions=lis
   row.names(X)<- NULL
   
   #getting phenotype in Y
-  Y <- data[, phenoname]
+  Y <- data[, phenoname, drop=TRUE]
   
   #getting genotype values in G
-  G <- data[, genoname]
+  G <- data[, genoname, drop=TRUE]
   
   # getting a new data frame with na filtered data
   data_filtered <- data.frame(predictor=X, genotype=G, phenotype=Y)
