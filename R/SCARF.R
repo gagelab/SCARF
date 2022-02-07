@@ -22,6 +22,8 @@
 #'     with columns corresponding to \code{genoname}, \code{phenoname}, 
 #'     \code{predictornames}, as well as the predicted \code{spatial_effect} for
 #'     each plot, and the adjusted phenotypes (raw phenotype - spatial correction).
+#'   In position 2, \code{model} has the Random Forest model that was fit to
+#'     the data and used to predict spatial effects.
 #' 
 #' @export
 
@@ -57,7 +59,7 @@ SCARF <-function(data, genoname, phenoname, predictornames, regressoroptions=lis
   # res[[1]] is phenotype differences
   # res[[2]] is true-false vector. Indicates if we will use that record in the training. 
   # We do not use records if its genotypes occured only once.
-  adj_pheno <- getDiffrencePhenotype(data_filtered$genotype, data_filtered$phenotype)
+  adj_pheno <- adjustphenotypes(data_filtered$genotype, data_filtered$phenotype)
   
   # prepare inputs of the regression model
   Y_adj <- adj_pheno[[1]]
@@ -67,10 +69,10 @@ SCARF <-function(data, genoname, phenoname, predictornames, regressoroptions=lis
   # Random forest regressor. Takes range and row information as predictor. 
   rf_params <- c(list(x=X_train,y=Y_train), 
                      regressoroptions)
-  scarf_model <- do.call(randomForest, rf_params)
+  scarf_model <- do.call(randomForest::randomForest, rf_params)
   
   # Predict phenotype corrections with all Data
-  predicted_differences <- predict(scarf_model, X) 
+  predicted_differences <- randomForest::predict(scarf_model, X) 
   
   # Correct phenotypes by subtracting spatial effects
   corrected_phenotye <- Y - predicted_differences
