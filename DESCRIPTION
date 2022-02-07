@@ -1,11 +1,13 @@
 Package: SCARF
 Title: Spatial Correction by Application of Random Forest
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R: c(
     person(given = "Emre", family = "Cimen", email = "ecimen@eskisehir.edu.tr",
-            role = c("aut", "cre")),
+            role = c("aut", "cre")
+    ),
     person(given = "Joseph", family = "Gage", email = "jlgage@ncsu.edu", 
-           role = c("aut", "trl"))
+           role = c("aut", "trl")
+    ))
 Description: SCARF provides a simple function for correcting spatial effects
     in agricultural field data. This software uses random forest regression
     to model spatial trends based on field coordinates and/or other relevent
