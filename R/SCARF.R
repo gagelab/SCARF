@@ -72,7 +72,7 @@ SCARF <-function(data, genoname, phenoname, predictornames, regressoroptions=lis
   scarf_model <- do.call(randomForest::randomForest, rf_params)
   
   # Predict phenotype corrections with all Data
-  predicted_differences <- randomForest::predict(scarf_model, X) 
+  predicted_differences <- predict(scarf_model, X) 
   
   # Correct phenotypes by subtracting spatial effects
   corrected_phenotye <- Y - predicted_differences
